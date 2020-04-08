@@ -25,4 +25,7 @@ app.get('/', (req, res) =>{
 const userRoute = require('./routes/users');
 app.use('/user', userRoute);
 
+const busRoute = require('./routes/buses');
+app.use('/bus', busRoute);
+
 app.listen(process.env.PORT);
