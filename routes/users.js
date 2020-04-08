@@ -2,48 +2,53 @@ const express = require('express');
 
 const router = express.Router();
 
-const Post = require('../models/user')
+const userModel = require('../models/user')
 
+//add a new user
 router.post('/add', async (req,res)=>{
-    const post = new Post({
+    const newUser = new userModel({
         name: req.body.name,
         email: req.body.email,
         mob: req.body.mob
     });
     try{
-        const savedPost = await post.save();
-        res.json(savedPost);
+        const user = await newUser.save();
+        res.json(user);
     }catch(err){
         res.json({message: err});
     }
 
 });
 
+//list all users
 router.get('/search', async (req,res)=>{
     try{
-        const posts = await Post.find();
-        res.json(posts);
+        const searchUser = await userModel.find();
+        res.json(searchUser);
     }catch(err){
         res.json({message:err});
     }
 });
 
+//search the user
 router.get('/search/:Id', async (req,res)=>{
     try{
-        const posts = await Post.findOne({'_id': req.params.Id});
-        res.json(posts);
+        const searchUser = await userModel.findOne({'_id': req.params.Id});
+        res.json(searchUser);
     }catch(err){
         res.json({message:err});
     }
 });
 
+//delete the user
 router.delete('/delete/:Id', async (req,res)=>{
     try{
-        const posts = await Post.remove({'_id': req.params.Id});
-        res.json(posts);
+        const deleteUser = await userModel.remove({'_id': req.params.Id});
+        res.json(deleteUser);
     }catch(err){
         res.json({message:err});
     }
 });
 
+//export module
 module.exports = router;

@@ -2,53 +2,57 @@ const express = require('express');
 
 const router = express.Router();
 
-const Post = require('../models/bus')
+const busModel = require('../models/bus')
 
+//add the bus
 router.post('/add', async (req,res)=>{
     let seatArray = [...Array(4)].map(x=>Array(10).fill(0))    
-    const post = new Post({
+    const newBus = new busModel({
         numberOfSeats: 40,
         Seats: seatArray,
-        date: req.body.mob,
         start_time: Date.parse(req.body.start_time),
         end_time:Date.parse(req.body.end_time),
         start_station: req.body.start_station,
         end_station: req.body.end_station
     });
     try{
-        const savedPost = await post.save();
-        res.json(savedPost);
+        const bus = await newBus.save();
+        res.json(bus);
     }catch(err){
         res.json({message: err});
     }
 
 });
 
+//list all buses
 router.get('/search', async (req,res)=>{
     try{
-        const posts = await Post.find();
-        res.json(posts);
+        const findBus = await busModel.find();
+        res.json(findBus);
     }catch(err){
         res.json({message:err});
     }
 });
 
+//search bus
 router.get('/search/:Id', async (req,res)=>{
     try{
-        const posts = await Post.findOne({'_id': req.params.Id});
-        res.json(posts);
+        const findBus = await busModel.findOne({'_id': req.params.Id});
+        res.json(findBus);
     }catch(err){
         res.json({message:err});
     }
 });
 
+//delete bus
 router.delete('/delete/:Id', async (req,res)=>{
     try{
-        const posts = await Post.remove({'_id': req.params.Id});
-        res.json(posts);
+        const removeBus = await busModel.remove({'_id': req.params.Id});
+        res.json(removeBus);
     }catch(err){
         res.json({message:err});
     }
 });
 
+//export module
 module.exports = router;
