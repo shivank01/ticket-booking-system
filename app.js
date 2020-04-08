@@ -22,4 +22,7 @@ app.get('/', (req, res) =>{
     res.send("Welcome to ticket booking system!");
 });
 
+const userRoute = require('./routes/users');
+app.use('/user', userRoute);
+
 app.listen(process.env.PORT);
