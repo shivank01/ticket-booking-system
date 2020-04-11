@@ -6,7 +6,7 @@ const busModel = require('../models/bus')
 
 //add the bus
 router.post('/add', async (req,res)=>{
-    let seatArray = [...Array(4)].map(x=>Array(10).fill(0))    
+    let seatArray = Array(40).fill(0)
     const newBus = new busModel({
         numberOfSeats: 40,
         Seats: seatArray,

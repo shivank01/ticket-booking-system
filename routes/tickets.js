@@ -11,27 +11,22 @@ router.post('/book', async (req,res)=>{
         //find the available seat and book it
         const bus = await busModel.findOne({'_id':req.body.busid});
         seats = bus['Seats']
-        flag=false;
-        for(i=0;i<4;i++){
-            for(j=0;j<10;++j){
-                if(seats[i][j]==0){
-                    seats[i][j]=1;
-                    r=i;
-                    c=j;
-                    flag=true;
-                    break;
-                }
-            }
-            if(flag)
+        var seatno=-1;
+        for(i=0;i<40;i++){
+            if(seats[i]==0){
+                seats[i]=1;
+                seatno=i+1;
                 break;
+            }
+        }
+        if(seatno==-1){
+            res.json("Seats not available");
         }
         //update the seat status
         const updateBus = await busModel.updateOne(
             { _id : req.body.busid},
             {$set : { Seats: seats}}
         );
-
-        seatno=r*4+c+1;
 
         //add ticket in db
         const newTicket = new ticketModel({
@@ -62,15 +57,13 @@ router.put('/cancel/:ID', async (req,res)=>{
             {_id : req.params.ID}
         );
         seatno = findTicket['seatno'];
-        let r = (seatno-1)%4;
-        let c = seatno -1 - 4*r;
 
         //extract the current seat structure
         const findBus = await busModel.findOne(
             {_id : req.params.ID}
         );
         seats = findBus['Seats'];
-        seats[r][c]=0;
+        seats[seatno-1]=0;
 
         //update the seat status
         const updateBus = await busModel.updateOne(
