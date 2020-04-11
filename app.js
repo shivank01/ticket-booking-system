@@ -2,7 +2,33 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
+const redis = require("redis");
+const bluebird = require('bluebird');
+
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
 require('dotenv/config');
+
+//setup environment constants
+const port = process.env.PORT || 3000;
+const port_redis = process.env.REDIS_PORT || 6379;
+const host = process.env.REDIS_HOST || 'localhost'
+const pass = process.env.REDIS_PASS || ''
+
+//create redis client
+const client = redis.createClient({
+  port      : process.env.REDIS_PORT,              
+  host      : process.env.REDIS_HOST,        
+  password  : process.env.REDIS_PASS   
+});
+
+//checking for error in redis
+client.on("error", function(error) {
+  console.error(error);
+});
+
+//export client
+module.exports = client
 
 //to parse the body of the APIs
 app.use(bodyParser.json());
