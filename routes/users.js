@@ -17,7 +17,6 @@ router.post('/add', async (req,res)=>{
     }catch(err){
         res.json({message: err});
     }
-
 });
 
 //list all users

@@ -58,5 +58,9 @@ app.use('/bus', busRoute);
 const ticketRoute = require('./routes/tickets');
 app.use('/ticket', ticketRoute);
 
+//to access ticket
+const adminRoute = require('./routes/admin');
+app.use('/admin', adminRoute);
+
 //start the node server
 app.listen(process.env.PORT);

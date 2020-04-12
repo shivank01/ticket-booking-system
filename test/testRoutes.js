@@ -1,8 +1,8 @@
 var expect  = require('chai').expect;
 var request = require('request');
 
-describe('Status and content', function() {
-    describe ('Main page', function() {
+describe('Basic test', function() {
+    describe ('Default route', function() {
         it('status', function(done){
             request('http://localhost:3000/', function(error, response, body) {
                 expect(response.statusCode).to.equal(200);
@@ -18,7 +18,7 @@ describe('Status and content', function() {
         });
     });
 
-    describe ('About page', function() {
+    describe ('arbitrary route', function() {
         it('status', function(done){
             request('http://localhost:3000/about', function(error, response, body) {
                 expect(response.statusCode).to.equal(404);

@@ -42,10 +42,20 @@ async function update(id, seatno, val) {
     }
 }
 
+//delete the key
+async function del(id) {
+    try{
+        await client.del('seats_'+id);
+    } catch(err) {
+        console.log(err);
+    }
+}
+
 //export functions
 module.exports = {
     exists: exists,
     set : set,
     update : update,
-    get : get
+    get : get,
+    del : del
 };
