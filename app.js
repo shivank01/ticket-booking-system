@@ -2,11 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
-const redis = require("redis");
-const bluebird = require('bluebird');
+const redis = require("async-redis");
 
-bluebird.promisifyAll(redis.RedisClient.prototype);
-bluebird.promisifyAll(redis.Multi.prototype);
 require('dotenv/config');
 
 //setup environment constants
