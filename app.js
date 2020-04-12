@@ -27,6 +27,8 @@ client.on("error", function(error) {
 //export client
 module.exports = client
 
+module.exports = app
+
 //to parse the body of the APIs
 app.use(bodyParser.json());
 
