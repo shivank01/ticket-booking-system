@@ -23,6 +23,7 @@ describe('/GET buses', () => {
     it('it should GET all the buses', (done) => {
         chai.request(server)
             .get('/bus/search')
+            .auth('admin','secret')
             .end((err, res) => {
                   res.should.have.status(200);
                   res.body.should.be.a('array');
@@ -45,6 +46,7 @@ describe('/POST buses', () => {
         }
         chai.request(server)
           .post('/bus/add')
+          .auth('admin','secret')
           .send(bus)
           .end((err, res) => {
                 res.should.have.status(200);

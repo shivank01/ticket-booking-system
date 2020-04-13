@@ -23,6 +23,7 @@ describe('/GET users', () => {
     it('it should GET all the users', (done) => {
         chai.request(server)
             .get('/user/search')
+            .auth('admin','secret')
             .end((err, res) => {
                   res.should.have.status(200);
                   res.body.should.be.a('array');
@@ -42,6 +43,7 @@ describe('/POST users', () => {
         }
         chai.request(server)
           .post('/user/add')
+          .auth('admin','secret')
           .send(user)
           .end((err, res) => {
                 res.should.have.status(200);
@@ -64,6 +66,7 @@ describe('/POST users', () => {
         }
         chai.request(server)
           .post('/user/add')
+          .auth('admin','secret')
           .send(user)
           .end((err, res) => {
                 res.should.have.status(200);

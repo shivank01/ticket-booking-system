@@ -22,7 +22,10 @@ system for. Maintain the code through the course of the development on a version
 ## Installation
 1. Install node from nvm.
 2. Install mongodb and redis.
-3. Run `npm install` inside the directory.
+3. Clone the repository.
+4. Run `npm install` inside the directory.
+5. Make `.env` file and put it in base directory.
+6. Run `npm test` to test and `npm start` to deploy.
 
 ## Documentation
 

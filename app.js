@@ -3,6 +3,12 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const redis = require("async-redis");
+const basicAuth = require('express-basic-auth')
+ 
+//basic authentication
+app.use(basicAuth({
+    users: { 'admin': 'secret' }
+}))
 
 require('dotenv/config');
 
