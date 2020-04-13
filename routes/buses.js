@@ -8,7 +8,7 @@ const busModel = require('../models/bus')
 router.post('/add', async (req,res)=>{
     let seatArray = Array(40).fill(0)
     const newBus = new busModel({
-        numberOfSeats: 40,
+        numberOfSeats: req.body.noofseats,
         Seats: seatArray,
         start_time: Date.parse(req.body.start_time),
         end_time:Date.parse(req.body.end_time),

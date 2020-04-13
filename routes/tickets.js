@@ -128,7 +128,7 @@ router.get('/search/:Id', async (req,res)=>{
     }
 });
 
-//to search all open tickets
+//to search all tickets with status
 router.get('/Ticketstatus', async (req,res)=>{
     try{
         console.log(req.query.status);
