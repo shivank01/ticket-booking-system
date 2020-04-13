@@ -6,7 +6,7 @@ let users = require('../models/user');
 //Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let server = require('../app');
+let server = require('../app').app;
 let should = chai.should();
 var expect = require('chai').expect;
 

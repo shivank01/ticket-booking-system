@@ -7,8 +7,8 @@ const redis = require("async-redis");
 require('dotenv/config');
 
 //setup environment constants
-const port = process.env.PORT || 3000;
-const port_redis = process.env.REDIS_PORT || 6379;
+const port = process.env.PORT || '3000';
+const port_redis = process.env.REDIS_PORT || '6379';
 const host = process.env.REDIS_HOST || 'localhost'
 const pass = process.env.REDIS_PASS || ''
 
@@ -24,10 +24,11 @@ client.on("error", function(error) {
   console.error(error);
 });
 
-//export client
-module.exports = client
-
-module.exports = app
+//export client and app
+module.exports = {
+  client : client,
+  app : app
+}
 
 //to parse the body of the APIs
 app.use(bodyParser.json());

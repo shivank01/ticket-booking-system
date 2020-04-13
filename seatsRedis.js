@@ -1,6 +1,6 @@
 /* Implementation of different function to access the redis DB */
 
-const client = require('./app')
+const client = require('./app').client
 
 //check if busID exists
 async function exists(id) {
