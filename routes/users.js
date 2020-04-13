@@ -13,7 +13,7 @@ router.post('/add', async (req,res)=>{
     });
     try{
         const user = await newUser.save();
-        res.json(user);
+        res.json({message: "User successfully added!", user });
     }catch(err){
         res.json({message: err});
     }
@@ -43,7 +43,7 @@ router.get('/search/:Id', async (req,res)=>{
 router.delete('/delete/:Id', async (req,res)=>{
     try{
         const deleteUser = await userModel.remove({'_id': req.params.Id});
-        res.json(deleteUser);
+        res.json({message: "User deleted", deleteUser });
     }catch(err){
         res.json({message:err});
     }

@@ -53,7 +53,7 @@ router.post('/book', async (req,res)=>{
             seatno: seatno
         });
             const Ticket = await newTicket.save();
-            res.json(Ticket);
+            res.json({message: "Ticket booked successfully!", Ticket });
     }catch(err){
         res.json({message: err});
     }
@@ -73,7 +73,7 @@ router.put('/cancel/:ID', async (req,res)=>{
         
         //check if ticket is already cancelled
         if(status==false)
-            return res.json("Ticket already cancelled");
+            return res.json({message: "Ticket already cancelled"});
 
         //update ticket status
         const updateTicket = await ticketModel.updateOne(
@@ -111,8 +111,17 @@ router.put('/cancel/:ID', async (req,res)=>{
             {$set: {Seats: seats}}
         );
         
-        res.json(updateBus);
+        res.json({message: "Cancelled ticket successfully", updateBus });
 
+    }catch(err){
+        res.json({message:err});
+    }
+});
+//list all tickets
+router.get('/search', async (req,res)=>{
+    try{
+        const findTicket = await ticketModel.find();
+        res.json(findTicket);
     }catch(err){
         res.json({message:err});
     }

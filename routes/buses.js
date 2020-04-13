@@ -17,7 +17,7 @@ router.post('/add', async (req,res)=>{
     });
     try{
         const bus = await newBus.save();
-        res.json(bus);
+        res.json({message: "Bus successfully added!", bus });
     }catch(err){
         res.json({message: err});
     }
@@ -48,7 +48,7 @@ router.get('/search/:Id', async (req,res)=>{
 router.delete('/delete/:Id', async (req,res)=>{
     try{
         const removeBus = await busModel.remove({'_id': req.params.Id});
-        res.json(removeBus);
+        res.json({message: "Delete bus successfully", removeBus });
     }catch(err){
         res.json({message:err});
     }

@@ -28,7 +28,7 @@ router.put('/bus/reset', async(req,res)=>{
             {bus_id : req.body.busid},
             {$set: {status: false}}
         );
-        res.json("Reset server successfully");
+        res.json({message: "Reset server successfully", book });
     }
     catch(err){
         res.json({message:err})

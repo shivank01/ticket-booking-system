@@ -69,8 +69,8 @@ describe('/POST users', () => {
                 res.should.have.status(200);
                 console.log(res.body);
                 res.body.should.be.a('object');
-                res.body.should.have.property('_id');
-                expect(res.body.name).to.equal(user['name']);
+                res.body.user.should.have.property('_id');
+                expect(res.body.user.name).to.equal(user['name']);
               done();
           });
     });
